@@ -1,0 +1,47 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<noscript>Sorry, your browser does not support JavaScript!</noscript>
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+
+	<meta charset="UTF-8">
+	<title>WritePath NMT (Beta)</title>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125494458-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-125494458-1');
+	</script>
+</head>
+<body onload="load()">
+<p class="title">Writepath NMT: Warren</p>
+<p class="subtitle">請輸入中文:</p>
+
+<form action="/" method="post">
+	<p class="mini">Model Version</p>	
+	<p class="form"><select name="model" id="model">
+		<option id="7787" value="7787">Warren version 0.10.2</option>
+		<option id="7789" value="7789">Warren version 0.9</option>
+		<!--<option id="7788" value="7788">Warren version 0.10</option>-->	
+		<!--<option id="7785" value="7785">Warren version 0.5</option>-->
+		
+		
+	</select>
+	<p class="form"><textarea type="text" class="form" name="zhsrc">{{ zhsrc }}</textarea></p>
+	<p class="form"><button type="submit" onclick="empty()"> 翻譯 </button></p>
+</form>
+<p class="subtitle"> Translated into English: </p>
+<p class="form"><textarea type="text" id="outp" class="form" readonly>{{ entgt }}</textarea></p>
+<!--
+<form action="/feedback" method="post">
+	<p class="subtitle">Improve this translation:</p> 
+	<p class="form"><textarea type="text" class="form" name="improve"></textarea></p>
+	<p class="form"><button type="submit" onclick="feedback()">Submit Improved Translation</button></p>
+</form>
+-->
+<p class="footer"> Latest version: v0.10.2 (1 Oct. 2018)<br>
+Latest stable version: v0.10.2 (1 Oct. 2018)</p>
+</body>
+</html>

@@ -1,16 +1,20 @@
 # Warren NMT Engine
-Developed by Milton  
+Developed by Milton
+
+## Introduction
 A Chinese-to-English machine translation engine, built upon OpenNMT: http://opennmt.net/  
 This repository contains both the training preparation (e.g. data collection, data processing and machine learning) and the web interface used to display the output (coupled with the API).  
   
-Web Translation Engine: flaskapp/
-Data Processing and Machine Learning: training/
+Web Translation Engine: flaskapp/  
+Data Processing and Machine Learning: training/ (in progress)
 
 ## Requirements (suggest to use pip to install, or run requirements.sh)
-* Flask>=1.0.2
+* flask>=1.0.2
 * jieba>=0.39
+* opencc-python-reimplemented>=0.1.4
+* mysql-connector-python>=8.0.12
 * virtualenv>=15.0.1
-
+ 
 ## How to host the web translation engine on GCP / AWS EC2
 1. Clone the repository  
 `git clone https://github.com/topadmit/warren/`  
@@ -23,6 +27,18 @@ Data Processing and Machine Learning: training/
 `source venv/bin/activate`  
 
 4. Install requirements
-Either: Run the shell script in the main folder  
+Suggestion: Run the shell script in the main folder  
 `cd path/to/warren`  
-`chmod +x ./install.sh`
+`chmod +x ./requirements.sh`  
+`sudo bash ./requirements.sh`  
+  
+5. Set up mySQL on Google Cloud 
+`sudo apt-get update`  
+`sudo apt-get -y install mysql-server`  
+`sudo mysql_secure_installation` (Follow the steps in the console)  
+  
+6. Set up the local database and tables  (Important: Check database name and credentials and modify `queries.py` or `options.cnf` with the correct details. Replace `username` and `password` with the credentials you want.)  
+`sudo mysql -u root -p`  
+`mysql> GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY 'password';`  
+`mysql> CREATE DATABASE warren;`  
+`mysql> CREATE TABLE suggestion(id INT AUTO_INCREMENT, en text, zh_hant text, rating tinyint(4), en_modified text, PRIMARY KEY (id));`

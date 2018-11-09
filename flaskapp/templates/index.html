@@ -1,7 +1,6 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-	<noscript>Sorry, your browser does not support JavaScript!</noscript>
 	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 
 	<meta charset="UTF-8">
@@ -14,6 +13,11 @@
 		gtag('js', new Date());
 		gtag('config', 'UA-125494458-1');
 	</script>
+    
+    <!-- Rating -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='rating.css') }}">
+    
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
 </head>
 <body onload="load()">
 <p class="title">Writepath NMT: Warren</p>
@@ -29,18 +33,29 @@
 		
 		
 	</select>
-	<p class="form"><textarea type="text" class="form" name="zhsrc">{{ zhsrc }}</textarea></p>
+	<p class="form"><textarea type="text" class="form" id="zhsrc" name="zhsrc">{{ zhsrc }}</textarea></p>
 	<p class="form"><button type="submit" onclick="empty()"> 翻譯 </button></p>
 </form>
 <p class="subtitle"> Translated into English: </p>
 <p class="form"><textarea type="text" id="outp" class="form" readonly>{{ entgt }}</textarea></p>
-<!--
+
 <form action="/feedback" method="post">
-	<p class="subtitle">Improve this translation:</p> 
-	<p class="form"><textarea type="text" class="form" name="improve"></textarea></p>
+	<p class="subtitle">Improve this translation: 
+    <!--<fieldset class="rating">
+        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Perfect - 3 stars"></label>
+        <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Some minor errors - 2.5 stars"></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Several errors - 2 stars"></label>
+        <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Many errors - 1.5 stars"></label>
+        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Very poor - 1 star"></label>
+        <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Completely unusable - 0.5 stars"></label>
+    </fieldset> -->
+	</p>
+    <p class="form"><textarea type="text" class="form" id="improve" name="improve">{{ improve }}</textarea></p>
+    <input type="hidden" name="eng" id="eng">
+    <input type="hidden" name="chi" id="chi">
 	<p class="form"><button type="submit" onclick="feedback()">Submit Improved Translation</button></p>
 </form>
--->
+
 <p class="footer"> Latest version: v0.10.2 (1 Oct. 2018)<br>
 Latest stable version: v0.10.2 (1 Oct. 2018)</p>
 </body>

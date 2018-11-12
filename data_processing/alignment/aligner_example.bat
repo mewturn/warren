@@ -1,0 +1,1 @@
+python smush.py chi/GLN20170125038_C.txt processed_chi/GLN20170125038_C.txt zh

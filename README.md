@@ -8,3 +8,9 @@ This repository contains both the training preparation (e.g. data collection, da
 * Web Translation Engine: flaskapp/  
 * Data Processing: data_processing/ (work in progress)  
 * Machine Learning: training/ (work in progress)
+
+## How to use
+1. Clone the repository  
+`git clone https://github.com/topadmit/warren/`  
+
+2. Go to the individual folders for set-up guides and the respective requirements

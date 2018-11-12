@@ -1,12 +1,5 @@
-# Warren NMT Engine
-Developed by Milton
-
-## Introduction
-A Chinese-to-English machine translation engine, built upon OpenNMT: http://opennmt.net/  
-This repository contains both the training preparation (e.g. data collection, data processing and machine learning) and the web interface used to display the output (coupled with the API).  
-  
-Web Translation Engine: flaskapp/  
-Data Processing and Machine Learning: training/ (in progress)
+# Flask App
+Flask version of Warren NMT, API-compatible.
 
 ## Requirements (suggest to use pip to install, or run requirements.sh)
 * flask>=1.0.2

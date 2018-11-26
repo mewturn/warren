@@ -20,6 +20,7 @@ Potential for Chinese verbs here but it is hard ... or we need to find a rule-ba
 
 import nltk
 import string
+import sys
 
 
 def findEnglishName(sentence):
@@ -52,5 +53,6 @@ def findEnglishName(sentence):
 
 
 if __name__ == "__main__":
-    findEnglishName(
-        "Mr. Law Chor Yam, aged 53, holds a master’s degree in business administration. Mr. Chew Chor Meng, Ms. Tan Bian, Dr. John Lim")
+    input_file = sys.argv[1]
+    with open(input_file, "r", encoding="utf-8") as inp:
+        findEnglishName(inp)

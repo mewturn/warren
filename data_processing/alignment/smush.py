@@ -230,7 +230,7 @@ if __name__ == "__main__":
     # Splitting part
     symbols = {
         "en": {". ", ";", ":", "\n"},
-        "zh": {"。", "：", "；", ". ", "\n"},
+        "zh": {"。", "：", "；", "\n"},
     }
 
     exceptions = {

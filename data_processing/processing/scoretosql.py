@@ -11,12 +11,19 @@ if __name__ == "__main__":
     )
     mycursor = mydb.cursor()
     infile = sys.argv[1]
-
+    logfile = "log.txt"
+    count = 1
     with open(infile, "r", encoding="utf-8") as inp:
-        for line in inp:
-            query = "INSERT INTO askwarren_scored VALUES(%s, %s, %s, %s, %s, %s)"
-            line = tuple(line.split("\t"))
-            query = query % line
-            print(query)
-            mycursor.execute(query)
-            mydb.commit()
+        with open(logfile, "w", encoding="utf-8") as log:
+            for line in inp:
+                try:
+                    query = "INSERT INTO askwarren_scored VALUES(%s, '%s', '%s', %s, %s, '%s')"
+                    line = [i.replace("'", "''").replace("\n", "") if i != "" else "-" for i in line.split("\\t")]
+                    query = query % tuple(line)
+                    print("QUERY #%s: %s" % (count, query))
+                    mycursor.execute(query)
+                    mydb.commit()
+                    count += 1
+                except Exception as e:
+                    print(e)
+                    log.write("%s: %s\n" % (count, e))

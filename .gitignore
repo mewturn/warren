@@ -2,3 +2,7 @@
 data_processing/alignment/align*
 data_processing/alignment/president*
 data_processing/downloaders/president*
+data_processing/alignment/CHI_txt/*
+data_processing/alignment/EN_txt/*
+data_processing/alignment/processed_eng/*
+data_processing/alignment/processed_chi/*

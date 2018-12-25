@@ -16,7 +16,7 @@ def compareFiles(en, zh):
     
     # If the length of both differ significantly, most likely misaligned
     if diff > c_len or diff > e_len:
-        return False
+        return True
     
     #print(english_content)
     #print(chinese_content)

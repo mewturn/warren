@@ -9,6 +9,15 @@ def compareFiles(en, zh):
         chinese_content = zh_in.readlines()
 
     similar = 0
+    
+    e_len = len(english_content)
+    c_len = len(chinese_content)
+    diff = abs(e_len - c_len)
+    
+    # If the length of both differ significantly, most likely misaligned
+    if diff > c_len or diff > e_len:
+        return False
+    
     #print(english_content)
     #print(chinese_content)
 

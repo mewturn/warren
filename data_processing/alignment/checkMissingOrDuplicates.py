@@ -1,6 +1,7 @@
 import sys
 import os
 
+# Return True: if file has problems
 def compareFiles(en, zh):
     with open(en, "r", encoding="utf-8") as en_in:
         english_content = en_in.readlines()
@@ -12,8 +13,14 @@ def compareFiles(en, zh):
     
     e_len = len(english_content)
     c_len = len(chinese_content)
-    diff = abs(e_len - c_len)
     
+    # If there isn't much content (or any content at all), then there could be a problem
+    if e_len < 10 or c_len < 10:
+        return True
+    
+
+    diff = abs(e_len - c_len)
+
     # If the length of both differ significantly, most likely misaligned
     if diff > c_len or diff > e_len:
         return True

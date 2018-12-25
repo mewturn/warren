@@ -16,4 +16,4 @@ if __name__ == "__main__":
                 # outp.write("python smush.py %s processed_chi/%s zh\n" % (zh_file, zh_file.replace("CHI_txt/", "")))
 
                 # Write LFAligner batch
-                outp.write("LF_aligner_4.1.exe -f=t -l=en,zh -s=y -r=xn -t=n -i=%s,%s" % (en_file.replace("EN_txt/", "processed_eng/"), zh_file.replace("CHI_txt/", "processed_chi/")))
+                outp.write("LF_aligner_4.1.exe -f=t -l=en,zh -s=y -r=xn -t=n -i=%s,%s\n" % (en_file.replace("EN_txt/", "processed_eng/"), zh_file.replace("CHI_txt/", "processed_chi/")))

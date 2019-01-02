@@ -29,18 +29,26 @@ def askWarren(content):
 
 if __name__ == "__main__":
     # Get last index
-    table = "warren_retrain"
+    table = "warren_align"
     query = "SELECT `id` FROM `%s` ORDER BY (`id`) DESC LIMIT 1;" % (table)
     mycursor.execute(query)
     last_index = mycursor.fetchone()[0]
     
-    # Split into n sets
-    n = 50
+    # Split into n sets, n needs to be sufficiently large for multi-threading in the future and prevent memory clogging (example 30,000 segments clogged by one thread)
+    n = 1000
     interval = int(last_index/n)
 
     for i in range(n):
         print("Processing batch #", i+1)
         try:
+            # Change this to jump
+            # cd desktop/writepath codes/warren/data_processing/processing
+            begin = 30
+            if i > 0 and i < begin:
+                lower_bound = interval * begin + 1
+                upper_bound = interval * (begin + 1)
+                continue
+
             # Initialize boundaries
             if i == 0:
                 lower_bound = 1

@@ -1,7 +1,8 @@
 # Data Processing
 Data Processing (Offline) version of Warren NMT, API-compatible.
 
-## Requirements (suggest to use pip to install, or run requirements.sh)
+## Requirements (suggest to use pip to install)
+Run: ` pip install -r requirements.txt`  
 * beautifulsoup4>=4.6.0
 * docx2txt>=0.7
 * google-api-python-client

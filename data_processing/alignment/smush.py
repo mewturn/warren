@@ -1,5 +1,5 @@
-import sys
 import re
+import argparse
 
 
 def istitle(wordslist):
@@ -215,7 +215,13 @@ def purge_noise(lines):
 
 
 if __name__ == "__main__":
-    input_file, output_file, language = sys.argv[1], sys.argv[2], sys.argv[3]
+    parser = argparse.ArgumentParser(description="Merge fragmented sentences, usually extracted from a PDF file or scraped from the web. Currently works for English and Traditional Chinese.")
+    parser.add_argument("-src", dest="src", required=True, help="Path to the source file (to be processed)")
+    parser.add_argument("-output", dest="output", required=True, help="Path to the output file you wish to create")
+    parser.add_argument("-lang", dest="lang", required=True, help="Language of the document {en, zh}")
+    args = parser.parse_args()
+
+    input_file, output_file, language = args.src, args.output, args.lang
     en_dir, zh_dir = "EN/", "ZH/"
     zh_dict_file = zh_dir + "zh_dict.txt"
     en_transition_file, zh_transition_file = en_dir + \
@@ -230,7 +236,7 @@ if __name__ == "__main__":
     # Splitting part
     symbols = {
         "en": {". ", ";", ":", "\n"},
-        "zh": {"。", "：", "；", "\n"},
+        "zh": {"。", "：", "；", ". ", "\n"},
     }
 
     exceptions = {

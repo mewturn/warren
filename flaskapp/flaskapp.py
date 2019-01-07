@@ -23,7 +23,7 @@ def api_translate(content):
     return render_template("index.html", entgt=translate.translate(content_t, model), zhsrc=content)
     #return translate._translate(content_t, model="7784")
 
-@app.route("/translate", methods=['GET'])
+@app.route("/translate", methods=['GET', 'POST'])
 def _api_translate(model="7787"):
     if not "q" in request.args:
         return "Error."

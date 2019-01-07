@@ -1,5 +1,6 @@
 import time
 import mysql.connector
+import os
 
 mydb = mysql.connector.connect(
     host="127.0.0.1",
@@ -9,16 +10,29 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
     
-if __name__ == "__main__":
-    aligned_txt = "aligned_merged_en_p-merged_zh_p.txt"
-    db = "temp_ar2"
+if __name__ == "__main__":    
+    db = "warren_align"
     
-    with open(aligned_txt, "r", encoding="utf-8") as inp:
-        for i in inp:
-            i = i.split("\t")
-            # Important to escape characters
-            query = "INSERT INTO %s VALUES(default, '%s', '%s');" % (db, i[0].replace("'", "\\'"), i[1].replace("'", "\\'"))
-            print(query)
-            mycursor.execute(query)
-            mydb.commit()
-            
+    for i in os.listdir('.'):
+        count = 0
+        print("Processing file: ", i)
+        try:
+            with open(i, "r", encoding="utf-8") as inp:
+                for i in inp:
+                    i = i.split("\t")
+                    if (not i[0] == '' and not i[1] == '' and not i[0].isspace() and not i[1].isspace()):
+                        count += 1
+                        if (not count%100):
+                            print("Processing line #", count)
+                        
+                        # For when the program crashes / terminates prematurely 
+                        if count < 1_185_183:
+                            continue
+                            
+                        # Important to escape characters
+                        query = "INSERT INTO %s VALUES(default, '%s', '%s', default);" % (db, i[0].replace("'", "\\'"), i[1].replace("'", "\\'"))
+                        
+                        mycursor.execute(query)
+                        mydb.commit()
+        except Exception as e:
+            print(e)

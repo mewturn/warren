@@ -1,0 +1,13 @@
+
+data_processing/alignment/align*
+data_processing/alignment/president*
+data_processing/downloaders/president*
+data_processing/alignment/CHI_txt/*
+data_processing/alignment/EN_txt/*
+data_processing/alignment/processed_eng/*
+data_processing/alignment/processed_chi/*
+data_processing/alignment/scripts/*
+data_processing/alignment/hunalign.exe.stackdump
+data_processing/alignment/LF_aligner*
+data_processing/alignment/other_tools/*
+data_processing/alignment/sample/*

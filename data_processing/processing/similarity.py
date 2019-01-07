@@ -14,8 +14,10 @@ if __name__ == "__main__":
                 #scores = [edit_distance(source_lines[i], predict_lines[i]) for i in range(len(predict_lines))]
                 for i in range(len(predict_lines)):
                     score = edit_distance(source_lines[i], predict_lines[i])
-                    print (score)
-                    outp.write(str(score) + "\n")
+                    max_length = max(len(source_lines[i]), len(predict_lines[i]))
+                    similarity = round(100 * (1 - (score / max_length)), 1) 
+                    print(similarity)
+                    outp.write(str(similarity) + "\n")
                 
                 #max_diff = "Biggest difference:" + str(max(scores)) + "\n"
                 #min_diff = "Smallest difference:" + str(min(scores)) + "\n"

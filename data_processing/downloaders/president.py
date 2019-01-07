@@ -8,8 +8,8 @@ if __name__ == "__main__":
     log_file = "error_log.txt"
     
     for code in range(1, 9999):
-        #if code > 1:
-        #    break
+        if code < 1923:
+            continue
         
         base_url = "http://www2.afe.com.hk/AFEWebService/Fundamental/getCompProfile?culture=%s&companyID=President&itemcode=%s&selectType=1&Type=0"
         en_url = base_url % ("en", code)
@@ -31,13 +31,13 @@ if __name__ == "__main__":
                 for content in en_soup.findAll("td", {"class":"cell_body"}):
                     for br in content.findAll("br"):
                         br.replace_with("\n")
-                        outp.write(content.text + "\n")
+                    outp.write(content.text + "\n")
             
             with open(zh_output % code, "w", encoding="utf-8") as outp:
                 for content in zh_soup.findAll("td", {"class":"cell_body"}):
                     for br in content.findAll("br"):
                         br.replace_with("\n")
-                        outp.write(content.text + "\n")                
+                    outp.write(content.text + "\n")                
             
             print ("Stock code", code, "completed.")
             
@@ -46,5 +46,3 @@ if __name__ == "__main__":
             with open(log_file, "a", encoding="utf-8") as log:
                 log.write(str(code) + ": Error\n")
             
-        finally:
-            time.sleep(2)

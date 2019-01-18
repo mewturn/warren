@@ -7,9 +7,11 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter#process_pd
 from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
-
+from threading import Timer
 from io import StringIO
+
 import os
+import time
 
 def pdf_to_text(pdfname):
 
@@ -36,6 +38,10 @@ def pdf_to_text(pdfname):
 
     return text
     
+def timeout(curr):
+    print (curr, "minutes have passed...")
+    t = Timer(60, timeout, [curr+1]).start()
+    
 if __name__ == "__main__":
     namelist = []
     txtlist = []
@@ -48,6 +54,8 @@ if __name__ == "__main__":
             txtlist.append(file[:-4])
 
     # Converts each PDF in namelist to a TXT file
+    timeout(0)
+    
     for filename in namelist:
         if filename in txtlist:
             print("Already existing file.")
@@ -57,5 +65,6 @@ if __name__ == "__main__":
             try:
                 with open(filename + '.txt', 'w', encoding='utf-8') as output:
                     output.write((pdf_to_text(filename + ".pdf")))
+					
             except Exception as e:
                 print(e)

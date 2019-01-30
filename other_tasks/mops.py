@@ -38,7 +38,7 @@ def getDocumentTypes(code, output_file):
 def getAnnualReport(code, output_file, year=107):
     url = "http://doc.twse.com.tw/server-java/t57sb01?step=1&colorchg=1&co_id=%s&year=%s&mtype=F&" % (code, year)
     log_file = "error_log.txt"
-    sleep_time = 2
+    sleep_time = 5
     
     print("Processing", code)
     try:

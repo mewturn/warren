@@ -36,4 +36,5 @@ Other processing scripts
 * `google_translate.py` : Reads content of a file and obtains translation from Google (need to insert Google key here)
 * `removeHTML.py` : Removes HTML content from a file (suggest to use bs4 instead)
 * `removepunctuations.py` : Removes punctuation from a file
-* `similarity.py` : Checks the Levenshtein distance between translations
+* `similarity.py` : Checks the Levenshtein distance between translations  
+* `utils.py`: Combines many of the above functions into a single library

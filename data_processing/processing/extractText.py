@@ -22,11 +22,14 @@ def pdf_to_text(pdfname):
     laparams = LAParams()
     device = TextConverter(rsrcmgr, sio, codec=codec, laparams=laparams)
     interpreter = PDFPageInterpreter(rsrcmgr, device)
-
+    
+    count = 1
     # Extract text
     fp = open(pdfname, 'rb')
     for page in PDFPage.get_pages(fp):
         interpreter.process_page(page)
+        print(f"Processing page {count}.")
+        count += 1
     fp.close()
 
     # Get text from StringIO
@@ -64,7 +67,8 @@ if __name__ == "__main__":
             print("Processing", filename)
             try:
                 with open(filename + '.txt', 'w', encoding='utf-8') as output:
+                    print("Writing to file...")
                     output.write((pdf_to_text(filename + ".pdf")))
-					
+                    print("Completed!")
             except Exception as e:
                 print(e)

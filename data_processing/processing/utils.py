@@ -45,12 +45,12 @@ def convertName(name, target="pinyin"):
         # 3-character name
         elif len(converted) == 3:
             last_name = converted[0]
-            first_name = "".join(converted[-2:])
+            first_name = "".join(converted[1:])
 
         # 4-character name (e.g. 歐陽, 司馬, 司徒, ...)
         else:
             last_name = "".join(converted[0:2])
-            first_name = "".join(converted[-2:])
+            first_name = "".join(converted[2:])
 
         # Capitalize last name
         last_name = last_name.capitalize()

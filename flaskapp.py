@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import translate
 import queries
-import log
+# import log
 
 app = Flask(__name__)
 

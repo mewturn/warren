@@ -2,14 +2,14 @@ import mysql.connector
 # import log
 
 # Database settings, change this!
-#mydb = mysql.connector.connect(
-#    host="localhost",
-    # user="warren",
-    # passwd="Writepath123",
-    # database="milton_corpus",
-# )
+mydb = mysql.connector.connect(
+   host="localhost",
+    user="warren",
+    passwd="Writepath123",
+    database="milton_corpus",
+)
 
-#mycursor = mydb.cursor()
+mycursor = mydb.cursor()
 
 def saveFeedback(en, zh_hant, modified_en, rating="default"):
     table = "suggestion"

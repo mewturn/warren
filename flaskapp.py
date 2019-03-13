@@ -14,6 +14,7 @@ def process():
     src = request.form['zhsrc']
     model = request.form.get('model')
     src_t = src.replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
+    queries.saveFeedback(en=src_t, zh_hant=src, modified_en='-1')
     return render_template("index.html", entgt=translate.translate(src_t, model), zhsrc=src)
 
 @app.route("/translate/<content>", methods=['GET'])

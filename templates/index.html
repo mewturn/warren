@@ -21,15 +21,15 @@
 </head>
 <body onload="load()">
 <p class="title">Writepath NMT: Warren</p>
-<p class="mini">*Note: Warren can only translate from Traditional Chinese to English. Warren works best when translating financial content and annual reports.
-<p class="subtitle">請輸入中文:</p>
+<p class="mini">*Note 1: Warren works best when translating from Traditional Chinese to English. <br> *Note 2: Warren works best when translating financial content and annual reports.
+<p class="subtitle">Enter English | 請輸入中文:</p>
 
 <form action="/" method="post">
-	<p class="mini">Model Version</p>	
+	<p class="mini">Select Language Pair & Model Version</p>	
 	<p class="form"><select name="model" id="model">
-		<option id="7787" value="7787">Warren version 1.0</option>
+		<option id="7787" value="7787">[ZH-TW to EN] Warren version 1.0</option>
 		<!--<option id="7789" value="7789">Warren version 0.9</option>-->
-		<!--<option id="7788" value="7788">Warren version 0.10</option>-->	
+		<option id="7788" value="7788">[EN to ZH-TW] Warren version 1.0</option>
 		<!--<option id="7785" value="7785">Warren version 0.5</option>-->
 		
 		
@@ -37,7 +37,7 @@
 	<p class="form"><textarea type="text" class="form" id="zhsrc" name="zhsrc">{{ zhsrc }}</textarea></p>
 	<p class="form"><button type="submit" onclick="empty()"> 翻譯 </button></p>
 </form>
-<p class="subtitle"> Translated into English: </p>
+<p class="subtitle"> 翻譯成繁體中文 | Translated into English: </p>
 <p class="form"><textarea type="text" id="outp" class="form" readonly>{{ entgt }}</textarea></p>
 
 <form action="/feedback" method="post">

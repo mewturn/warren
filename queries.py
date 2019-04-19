@@ -1,4 +1,4 @@
-import mysql.connector
+import pymysql
 # import log
 
 def saveFeedback(en, zh_hant, modified_en, rating="default"):

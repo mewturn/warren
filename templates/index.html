@@ -1,0 +1,63 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+
+	<meta charset="UTF-8">
+	<title>WritePath NMT (Beta)</title>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125494458-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-125494458-1');
+	</script>
+    
+    <!-- Rating -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='rating.css') }}">
+    
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
+</head>
+<body onload="load()">
+<p class="title">Writepath NMT: Warren</p>
+<p class="mini">*Note 1: Warren works best when translating from Traditional Chinese to English. <br> *Note 2: Warren works best when translating financial content and annual reports.
+<p class="subtitle">Enter English | 請輸入中文:</p>
+
+<form action="/" method="post">
+	<p class="mini">Select Language Pair & Model Version</p>	
+	<p class="form"><select name="model" id="model">
+		<option id="7787" value="7787">[ZH-TW to EN] Warren version 1.0</option>
+		<!--<option id="7789" value="7789">Warren version 0.9</option>-->
+		<option id="7788" value="7788">[EN to ZH-TW] Warren version 1.0</option>
+		<!--<option id="7785" value="7785">Warren version 0.5</option>-->
+		
+		
+	</select>
+	<p class="form"><textarea type="text" class="form" id="zhsrc" name="zhsrc">{{ zhsrc }}</textarea></p>
+	<p class="form"><button type="submit" onclick="empty()"> 翻譯 </button></p>
+</form>
+<p class="subtitle"> 翻譯成繁體中文 | Translated into English: </p>
+<p class="form"><textarea type="text" id="outp" class="form" readonly>{{ entgt }}</textarea></p>
+
+<form action="/feedback" method="post">
+	<p class="subtitle">Improve this translation: 
+    <!--<fieldset class="rating">
+        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Perfect - 3 stars"></label>
+        <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Some minor errors - 2.5 stars"></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Several errors - 2 stars"></label>
+        <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Many errors - 1.5 stars"></label>
+        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Very poor - 1 star"></label>
+        <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Completely unusable - 0.5 stars"></label>
+    </fieldset> -->
+	</p>
+    <p class="form"><textarea type="text" class="form" id="improve" name="improve">{{ improve }}</textarea></p>
+    <input type="hidden" name="eng" id="eng">
+    <input type="hidden" name="chi" id="chi">
+	<p class="form"><button type="submit" onclick="feedback()">Submit Improved Translation</button></p>
+</form>
+
+<p class="footer"> Latest version: v1.0 (24 Jan. 2018)<br>
+Latest stable version: v1.0 (24 Jan. 2018)</p>
+</body>
+</html>

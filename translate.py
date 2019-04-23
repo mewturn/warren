@@ -32,7 +32,7 @@ def _translate(content, model):
             for sent in sent_list:
                 sent = sc.smushText(sent, "sc")
                 num = re.findall(r'\d+', sent)
-                processed_num = ["{:,}".format(eval(i))  if len(i) > 4 and eval(i) > 2100 else i for i in num]
+                processed_num = ["{:,}".format(eval(i)) if len(i) > 4 and i[0] != "0" and eval(i) > 2100 else i for i in num]
                 for i in range(len(processed_num)):
                     sent = sent.replace(num[i], processed_num[i])
 

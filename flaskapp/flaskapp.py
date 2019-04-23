@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import translate
 import queries
-import log
+# import log
 
 app = Flask(__name__)
 
@@ -15,10 +15,9 @@ def process():
     model = request.form.get('model')
     src_t = src.replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
     en = translate.translate(src_t, model)
-    queries.saveFeedback(en=en, zh_hant=src, modified_en='-1')	
-    queries.countUsage("online", src)	
+    queries.saveFeedback(en=en, zh_hant=src, modified_en='-1')
+    queries.countUsage("online", src)
     return render_template("index.html", entgt=en, zhsrc=src)
-    #return render_template("index.html", entgt=translate.translate(src_t, model), zhsrc=src)
 
 @app.route("/translate/<content>", methods=['GET'])
 def api_translate(content):
@@ -32,8 +31,8 @@ def _api_translate(model="7787"):
     if not "q" in request.args:
         return "Error."
     content = request.args.get("q").replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
-    key = "none"	
-    if "key" in request.args:	
+    key = "none"
+    if "key" in request.args:
         key = request.args.get("key")
     if "model" in request.args:
         model = request.args.get("model")

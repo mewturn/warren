@@ -1,29 +1,61 @@
-import mysql.connector
+import pymysql
+import datetime
 import log
-
-# Database settings, change this!
-mydb = mysql.connector.connect(
-    host="127.0.0.1",
-    user="root",
-    passwd="",
-    database="milton_corpus",
-)
-
-mycursor = mydb.cursor()
+import re
 
 def saveFeedback(en, zh_hant, modified_en, rating="default"):
-    table = "warren_evaluation"
+    table = "suggestion"
     query = "INSERT INTO %s VALUES(default, '%s', '%s', %s, '%s')" % (table, en, zh_hant, rating, modified_en)
-    
+
     try:
-        log.writeLog(query)
+        # Database settings, change this!
+        mydb = pymysql.connect(host="localhost", user="warren", passwd="Writepath123", db="milton_corpus")
+        mycursor = mydb.cursor()
         mycursor.execute(query)
         mydb.commit()
-    
+
     except Exception as e:
         print(e)
         log.writeLog(str(e))
-        
+
     else:
         print(query, "executed successfully!")
-        
+
+    finally:
+        if mydb.open:
+            mydb.close()
+
+def countUsage(user, sentence):
+    table = "translation_usage"
+    datestring = datetime.datetime.now().strftime("%d-%m-%y")
+    words = countWords(sentence)
+
+    try:
+        query = "SELECT * FROM `%s` WHERE `user` = '%s' AND `datestring` = '%s'" % (table, user, datestring)
+        mydb = pymysql.connect(host="localhost", user="warren", passwd="Writepath123", db="milton_corpus")
+        mycursor = mydb.cursor()
+        mycursor.execute(query)
+        mycursor.fetchone()
+
+        if len(query) == 0:
+            query = "INSERT INTO `%s` VALUES(default, '%s', '%s', %s)" % (table, datestring, user, words)
+        else:
+            query = "UPDATE `%s` SET `words` = `words` + %s WHERE `user` = '%s' AND `datestring` = '%s'" % (table, words, user, datestring)
+
+        mycursor.execute(query)
+        mydb.commit()
+
+    except Exception as e:
+        print(e)
+        log.writeLog(str(e))
+
+    else:
+        print(query, "executed successfully!")
+
+    finally:
+        if mydb.open:
+            mydb.close()
+
+
+def countWords(sentence):
+    return sum([1 for i in re.findall(ur'[\u4e00-\u9fff]+', sentence)])

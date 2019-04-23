@@ -1,0 +1,5 @@
+flask
+jieba
+pymysql
+OpenCC
+virtualenv

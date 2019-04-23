@@ -16,13 +16,14 @@ def process():
     src_t = src.replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
     en = translate.translate(src_t, model)
     queries.saveFeedback(en=en, zh_hant=src, modified_en='-1')
-    queries.countUsage("online", src)
+    queries.countUsage("online", src_t)
     return render_template("index.html", entgt=en, zhsrc=src)
 
 @app.route("/translate/<content>", methods=['GET'])
 def api_translate(content):
     content_t = content.replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
     model = "7787"
+    queries.countUsage("online_api", content_t)
     return render_template("index.html", entgt=translate.translate(content_t, model), zhsrc=content)
     #return translate._translate(content_t, model="7784")
 
@@ -31,7 +32,7 @@ def _api_translate(model="7787"):
     if not "q" in request.args:
         return "Error."
     content = request.args.get("q").replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
-    key = "none"
+    key = "writepath_api"
     if "key" in request.args:
         key = request.args.get("key")
     if "model" in request.args:

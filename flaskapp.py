@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def main():
-    return render_template("index.html")
+    count = queries.getUsage()
+    return render_template("index.html", count=count)
 
 @app.route("/", methods=['POST'])
 def process():
@@ -17,14 +18,16 @@ def process():
     en = translate.translate(src_t, model)
     queries.saveFeedback(en=en, zh_hant=src, modified_en='-1')
     queries.countUsage("online", src_t)
-    return render_template("index.html", entgt=en, zhsrc=src)
+    count = queries.getUsage()
+    return render_template("index.html", entgt=en, zhsrc=src, count=count)
 
 @app.route("/translate/<content>", methods=['GET'])
 def api_translate(content):
     content_t = content.replace('"', "'").replace("｠","｠ ").replace("｟"," ｟")
     model = "7787"
     queries.countUsage("online_api", content_t)
-    return render_template("index.html", entgt=translate.translate(content_t, model), zhsrc=content)
+    count = queries.getUsage()
+    return render_template("index.html", entgt=translate.translate(content_t, model), zhsrc=content, count=count)
     #return translate._translate(content_t, model="7784")
 
 @app.route("/translate", methods=['GET', 'POST'])
@@ -46,7 +49,8 @@ def feedback():
     eng, chi = request.form['eng'], request.form['chi']
     #rating = request.form['stars']
     queries.saveFeedback(en=eng, zh_hant=chi, modified_en=improve)
-    return render_template("index.html", entgt=eng, zhsrc=chi, improve=improve)
+    count = queries.getUsage()
+    return render_template("index.html", entgt=eng, zhsrc=chi, improve=improve, count=count)
     #return render_template("index.html", entgt=translate.translate(improve, model), zhsrc=improve)
 
 # model: which model to translate with, src: source language, tgt: target language, currently all not in use 

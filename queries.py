@@ -64,13 +64,13 @@ def countWords(sentence):
 def getUsage():
     query = "SELECT sum(`words`) FROM `translation_usage`; "
     try:
-        mydb = pymysql.connect(host="localhost", user="warren", passwd="Writepath123", db="milton_corpus"
+        mydb = pymysql.connect(host="localhost", user="warren", passwd="Writepath123", db="milton_corpus")
         mycursor = mydb.cursor()
         mycursor.execute(query)
         count = mycursor.fetchone()
         if count == None:
             return 0
-        return count[0]
+        return "{:,}".format(count[0])
 
     except Exception as e:
         print(e)
